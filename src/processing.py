@@ -105,4 +105,4 @@ def data_to_csv(input_folder: str)->None:
                 writer.writerow(['Work', 'Author', 'Page Number'])
                 writer.writerows(parsed_data)
 
-            print(f'Data successfully written to {output_path}')
+    print(f'Data successfully written to {output_path}')
