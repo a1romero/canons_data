@@ -1,1 +1,6 @@
 pytesseract
+fitz
+frontend
+pathlib
+csv
+re
