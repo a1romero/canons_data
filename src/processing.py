@@ -7,6 +7,7 @@ from io import StringIO
 from pathlib import Path
 import csv
 import re
+from tqdm import tqdm
 
 def pdf_to_data(pdf_path: str, output_folder: str, tesseract_path: str, include_pngs= False):
     '''Chop a given PDF into individual pages, then convert each PDF into an image (saved to the pngs folder). Convert OCR data about each page into a .csv.
@@ -22,7 +23,7 @@ def pdf_to_data(pdf_path: str, output_folder: str, tesseract_path: str, include_
 
     sum_string = ''
     tsv_total = pd.DataFrame()
-    for page_num in range(open_pdf.page_count): # iterate through individual pages
+    for page_num in tqdm(range(open_pdf.page_count)): # iterate through individual pages
         page = open_pdf[page_num]
 
         img = page.get_pixmap()
@@ -71,7 +72,7 @@ def data_to_csv(input_folder: str)->None:
     parsed_data = []
     last_author = None
 
-    with open(input_path, 'r') as file:
+    with open(input_path, 'r', encoding = 'utf8') as file:
         for line in file:
             line = line.strip()
             if not line:
